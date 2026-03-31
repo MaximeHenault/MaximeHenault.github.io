@@ -1,173 +1,294 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Portfolio | Maxime Hénault</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="google-site-verification" content="TauOkFybZb0nTmqL1A4Y41s9ssn9zyyzBuwrFCet6Yg" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="TauOkFybZb0nTmqL1A4Y41s9ssn9zyyzBuwrFCet6Yg" />
+<title>Maxime Hénault</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; cursor:none; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #0D0D0D;
+    color: #EAEAEA;
+    overflow-x: hidden;
+}
+
+/* LOADER */
+
+#loader {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #0D0D0D;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    font-size:2rem;
+    letter-spacing:5px;
+}
+
+/* CURSOR */
+
+.cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #7F5AF0;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* PARTICLES */
+
+canvas {
+    position: fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* NAV */
+
+nav {
+    position: fixed;
+    width: 100%;
+    padding: 20px 10%;
+    display:flex;
+    justify-content:space-between;
+    backdrop-filter: blur(10px);
+    z-index:100;
+}
+
+/* HERO */
+
+.hero {
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:0 10%;
+}
+
+.hero h1 { font-size:4rem; }
+.hero span { color:#7F5AF0; }
+
+.typewriter {
+    color:#aaa;
+    margin-top:15px;
+}
+
+/* BUTTON */
+
+.btn {
+    padding:12px 25px;
+    border:1px solid #7F5AF0;
+    background:transparent;
+    color:white;
+    border-radius:10px;
+    margin-top:20px;
+    display:inline-block;
+    text-decoration:none;
+}
+
+.btn:hover {
+    background:#7F5AF0;
+    box-shadow:0 0 20px #7F5AF0;
+}
+
+/* FEATURED PROJECT */
+
+.featured {
+    padding:100px 10%;
+}
+
+.featured-box {
+    display:flex;
+    gap:40px;
+    background:#1A1A1A;
+    padding:30px;
+    border-radius:20px;
+}
+
+.featured img {
+    width:50%;
+    border-radius:15px;
+}
+
+/* PROJECTS */
+
+.projects {
+    padding:100px 10%;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.card {
+    background:#1A1A1A;
+    padding:20px;
+    border-radius:15px;
+    transition:0.3s;
+}
+
+.card:hover {
+    transform:translateY(-10px);
+    box-shadow:0 0 30px rgba(127,90,240,0.4);
+}
+
+/* GITHUB */
+
+.github {
+    padding:100px 10%;
+}
+
+.repo {
+    margin:10px 0;
+}
+
+/* ANIM */
+
+.hidden { opacity:0; transform:translateY(40px); transition:0.6s; }
+.show { opacity:1; transform:translateY(0); }
+
+</style>
 </head>
 
 <body>
 
-<header>
+<div id="loader">MH</div>
+<div class="cursor"></div>
+<canvas id="bg"></canvas>
 
-    <nav>
-        <h1>Maxime Hénault</h1>
-
-        <ul>
-            <li><a href="#about">À propos</a></li>
-            <li><a href="#skills">Compétences</a></li>
-            <li><a href="#projects">Projets</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-    </nav>
-
-</header>
-
+<nav>
+    <div>MH</div>
+</nav>
 
 <section class="hero">
-
-    <h2>Développeur étudiant</h2>
-
-    <p>BTS SIO option SLAM</p>
-
-    <button onclick="scrollProjects()">Voir mes projets</button>
-
+    <h1>Maxime <span>Hénault</span></h1>
+    <div class="typewriter" id="type"></div>
+    <a href="#projects" class="btn">Voir mes projets</a>
 </section>
 
-
-<section id="about">
-
-<h2>À propos de moi</h2>
-
-<p>
-
-Je suis actuellement étudiant en <strong>BTS SIO option SLAM</strong>.  
-Je suis passionné par le développement, les bases de données et l'automatisation.
-
-J'ai réalisé plusieurs projets comme :
-
-</p>
-
-<ul>
-
-<li>Application de notation d'animés, films et séries (MyReview)</li>
-<li>Base de données SQL complète avec quizz</li>
-<li>Scripts Python pour automatiser des imports de données</li>
-<li>Utilisation de Symfony pour des projets web</li>
-
-</ul>
-
-<p>
-
-J'ai également réalisé un stage chez <strong>Thales LAS</strong> où j'ai travaillé sur
-la création de processus métier avec <strong>Iterop</strong>.
-
-</p>
-
+<section class="featured">
+    <h2>Projet principal</h2>
+    <div class="featured-box">
+        <img src="https://via.placeholder.com/500x300">
+        <div>
+            <h3>Fulbank</h3>
+            <p>Application bancaire crypto complète en C# avec interface WPF.</p>
+            <a href="#" class="btn">Voir le code</a>
+        </div>
+    </div>
 </section>
 
+<section class="projects" id="projects">
+    <div class="card hidden">
+        <h3>Daylence</h3>
+        <p>App de gestion de vie en React.</p>
+    </div>
 
-<section id="skills">
-
-<h2>Compétences</h2>
-
-<div class="skills-grid">
-
-<div class="skill">HTML / CSS</div>
-<div class="skill">JavaScript</div>
-<div class="skill">PHP</div>
-<div class="skill">Symfony</div>
-<div class="skill">SQL</div>
-<div class="skill">Python</div>
-<div class="skill">MariaDB / PostgreSQL</div>
-<div class="skill">Git</div>
-
-</div>
-
+    <div class="card hidden">
+        <h3>Cluedo</h3>
+        <p>Jeu PHP/MySQL.</p>
+    </div>
 </section>
 
-
-<section id="projects">
-
-<h2>Projets</h2>
-
-<div class="projects">
-
-<div class="card">
-
-<h3>MyReview</h3>
-
-<p>
-
-Application web permettant de noter des animés, films et séries.
-
-</p>
-
-</div>
-
-<div class="card">
-    <h3>Exposé sur la tortue / Projet de classe</h3>
-    <p>Conception d'une base SQL complète avec questions, réponses et catégories.</p>
-</div>
-
-<!-- https://zoofulbert.com/Maxime/tortue.html -->
-    
-<div class="card">
-
-<h3>Base de données Quiz</h3>
-
-<p>
-
-Conception d'une base SQL complète avec questions, réponses et catégories.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Scripts Python</h3>
-
-<p>
-
-Scripts permettant d'importer et traiter des données automatiquement.
-
-</p>
-
-</div>
-
-<div class="card">
-    <h3>Ô Saveurs Reastaurant</h3>
-    <p>Réalisation d'un site vitrine pour le restaurant Ô Saveurs avec système de réservation</p>
-    <!-- Le projet : https://restaurantOsaveurs -->
-</div>
-
-</div>
-
+<section class="github">
+    <h2>Mes repos GitHub</h2>
+    <div id="repos"></div>
 </section>
 
+<script>
 
-<section id="contact">
+/* LOADER */
+window.onload = () => {
+    setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+    }, 1000);
+};
 
-<h2>Contact</h2>
+/* CURSOR */
+const cursor = document.querySelector('.cursor');
+document.addEventListener('mousemove', e => {
+    cursor.style.top = e.clientY + 'px';
+    cursor.style.left = e.clientX + 'px';
+});
 
-<p>Email : maxime.henault@lyceefulbert.fr</p>
+/* TYPEWRITER */
+const text = "Développeur Full Stack | Symfony | React | C#";
+let i = 0;
+function typing() {
+    if (i < text.length) {
+        document.getElementById("type").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 40);
+    }
+}
+typing();
 
-<p>GitHub : github.com/maxime</p>
+/* PARTICLES */
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
 
-</section>
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
+let particles = [];
 
-<footer>
+for(let i=0;i<80;i++){
+    particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2
+    });
+}
 
-<p>© 2026 - Maxime Hénault</p>
+function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle="#7F5AF0";
+        ctx.fill();
+    });
+    requestAnimationFrame(draw);
+}
+draw();
 
-</footer>
+/* GITHUB API */
+fetch("https://api.github.com/users/MaximeHenault/repos")
+.then(res=>res.json())
+.then(data=>{
+    const container = document.getElementById("repos");
+    data.slice(0,5).forEach(repo=>{
+        const div = document.createElement("div");
+        div.classList.add("repo");
+        div.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>`;
+        container.appendChild(div);
+    });
+});
 
-<script src="script.js"></script>
+/* SCROLL ANIM */
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+    });
+});
+
+document.querySelectorAll('.hidden').forEach(el=>observer.observe(el));
+
+</script>
 
 </body>
 </html>
