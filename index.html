@@ -3,291 +3,837 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maxime Henault — Développeur Web & Logiciel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <meta name="google-site-verification" content="TauOkFybZb0nTmqL1A4Y41s9ssn9zyyzBuwrFCet6Yg" />
-<title>Maxime Hénault</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* RESET */
-* { margin:0; padding:0; box-sizing:border-box; cursor:none; }
+  :root {
+    --bg: #0b0b0b;
+    --bg2: #141414;
+    --bg3: #1c1c1c;
+    --text: #f0ebe0;
+    --text-muted: #888880;
+    --accent: #c8f500;
+    --accent-dark: #9dc200;
+    --border: rgba(240,235,224,0.08);
+    --border-hover: rgba(200,245,0,0.3);
+  }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background: #0D0D0D;
-    color: #EAEAEA;
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
     overflow-x: hidden;
-}
+  }
 
-/* LOADER */
-
-#loader {
+  /* Grain texture overlay */
+  body::before {
+    content: '';
     position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: #0D0D0D;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-    font-size:2rem;
-    letter-spacing:5px;
-}
-
-/* CURSOR */
-
-.cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #7F5AF0;
-    border-radius: 50%;
-    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
     pointer-events: none;
-    z-index: 999;
-}
+    z-index: 9999;
+  }
 
-/* PARTICLES */
-
-canvas {
+  /* ─── NAV ─────────────────────────────────── */
+  nav {
     position: fixed;
-    top:0;
-    left:0;
-    z-index:-1;
-}
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(11,11,11,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
 
-/* NAV */
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    text-decoration: none;
+  }
 
-nav {
-    position: fixed;
-    width: 100%;
-    padding: 20px 10%;
-    display:flex;
-    justify-content:space-between;
-    backdrop-filter: blur(10px);
-    z-index:100;
-}
+  .nav-logo span { color: var(--accent); }
 
-/* HERO */
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
 
-.hero {
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:0 10%;
-}
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
 
-.hero h1 { font-size:4rem; }
-.hero span { color:#7F5AF0; }
+  .nav-links a:hover { color: var(--accent); }
 
-.typewriter {
-    color:#aaa;
-    margin-top:15px;
-}
+  /* ─── HERO ────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem 3rem 4rem;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
 
-/* BUTTON */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(200,245,0,0.08);
+    border: 1px solid rgba(200,245,0,0.2);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
 
-.btn {
-    padding:12px 25px;
-    border:1px solid #7F5AF0;
-    background:transparent;
-    color:white;
-    border-radius:10px;
-    margin-top:20px;
-    display:inline-block;
-    text-decoration:none;
-}
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
 
-.btn:hover {
-    background:#7F5AF0;
-    box-shadow:0 0 20px #7F5AF0;
-}
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
 
-/* FEATURED PROJECT */
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 14vw, 13rem);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
 
-.featured {
-    padding:100px 10%;
-}
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+    display: block;
+  }
 
-.featured-box {
-    display:flex;
-    gap:40px;
-    background:#1A1A1A;
-    padding:30px;
-    border-radius:20px;
-}
+  .hero-meta {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
 
-.featured img {
-    width:50%;
-    border-radius:15px;
-}
+  .hero-desc {
+    max-width: 480px;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
 
-/* PROJECTS */
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+  }
 
-.projects {
-    padding:100px 10%;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:30px;
-}
+  .hero-stat {
+    text-align: right;
+  }
 
-.card {
-    background:#1A1A1A;
-    padding:20px;
-    border-radius:15px;
-    transition:0.3s;
-}
+  .hero-stat .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: var(--accent);
+    line-height: 1;
+  }
 
-.card:hover {
-    transform:translateY(-10px);
-    box-shadow:0 0 30px rgba(127,90,240,0.4);
-}
+  .hero-stat .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 
-/* GITHUB */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    animation: bounce 2.5s infinite;
+  }
 
-.github {
-    padding:100px 10%;
-}
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--text-muted), transparent);
+  }
 
-.repo {
-    margin:10px 0;
-}
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
 
-/* ANIM */
+  /* ─── SECTION HEADER ──────────────────────── */
+  .section-header {
+    padding: 5rem 3rem 3rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
 
-.hidden { opacity:0; transform:translateY(40px); transition:0.6s; }
-.show { opacity:1; transform:translateY(0); }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
 
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  /* ─── PROJECTS ────────────────────────────── */
+  #projets { border-bottom: 1px solid var(--border); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-card {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 3rem;
+    position: relative;
+    transition: background 0.3s;
+    cursor: default;
+    overflow: hidden;
+  }
+
+  .project-card:nth-child(even) { border-right: none; }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 0;
+  }
+
+  .project-card:hover::before { opacity: 0.03; }
+
+  .project-card:hover { border-color: var(--border-hover); }
+
+  .project-card > * { position: relative; z-index: 1; }
+
+  .project-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    opacity: 0.7;
+  }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .project-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .project-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(200,245,0,0.08);
+  }
+
+  .project-link.disabled {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  .project-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .project-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+    background: var(--bg3);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .project-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+  }
+
+  .status-done {
+    background: rgba(200,245,0,0.08);
+    color: var(--accent);
+    border: 1px solid rgba(200,245,0,0.2);
+  }
+
+  .status-wip {
+    background: rgba(255,165,0,0.08);
+    color: #ffa500;
+    border: 1px solid rgba(255,165,0,0.2);
+  }
+
+  .status-soon {
+    background: rgba(136,136,128,0.1);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  /* ─── ABOUT ───────────────────────────────── */
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-left {
+    padding: 4rem 3rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .about-text {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .about-text strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .about-right {
+    padding: 4rem 3rem;
+  }
+
+  .skills-group {
+    margin-bottom: 2rem;
+  }
+
+  .skills-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-pill {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: var(--bg2);
+    transition: all 0.2s;
+  }
+
+  .skill-pill:hover {
+    border-color: var(--border-hover);
+    color: var(--accent);
+  }
+
+  /* ─── CONTACT ─────────────────────────────── */
+  .contact-section {
+    padding: 5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .contact-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .contact-title span { color: var(--accent); }
+
+  .contact-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.8rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    transition: all 0.25s;
+    background: var(--bg2);
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(200,245,0,0.06);
+  }
+
+  .contact-link.primary {
+    background: var(--accent);
+    color: #0b0b0b;
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+
+  .contact-link.primary:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+    color: #0b0b0b;
+  }
+
+  /* ─── FOOTER ──────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ─── ANIMATIONS ──────────────────────────── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .hero { padding: 2rem 1.5rem 4rem; }
+    .hero h1 { font-size: clamp(3.5rem, 16vw, 6rem); }
+    .section-header { padding: 3rem 1.5rem 2rem; flex-direction: column; gap: 0.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card:nth-child(even) { border-right: 1px solid var(--border); }
+    .project-card { padding: 2rem 1.5rem; }
+    .about-content { grid-template-columns: 1fr; }
+    .about-left { border-right: none; border-bottom: 1px solid var(--border); padding: 2.5rem 1.5rem; }
+    .about-right { padding: 2.5rem 1.5rem; }
+    .contact-section { padding: 3.5rem 1.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
 </style>
 </head>
-
 <body>
 
-<div id="loader">MH</div>
-<div class="cursor"></div>
-<canvas id="bg"></canvas>
-
+<!-- ─── NAVIGATION ─────────────────────────────── -->
 <nav>
-    <div>MH</div>
+  <a href="#" class="nav-logo">M<span>.</span>H</a>
+  <ul class="nav-links">
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
+<!-- ─── HERO ──────────────────────────────────── -->
 <section class="hero">
-    <h1>Maxime <span>Hénault</span></h1>
-    <div class="typewriter" id="type"></div>
-    <a href="#projects" class="btn">Voir mes projets</a>
+  <div class="hero-badge">Disponible pour de nouvelles opportunités</div>
+  <h1>Maxime<em>Henault</em></h1>
+  <div class="hero-meta">
+    <p class="hero-desc">Développeur web & logiciel basé à <strong style="color:var(--text)">Évreux, Normandie</strong>. Je conçois des expériences numériques soignées — du site vitrine à l'application métier.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">8</div>
+        <div class="label">Projets</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">5+</div>
+        <div class="label">Technos</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
 </section>
 
-<section class="featured">
-    <h2>Projet principal</h2>
-    <div class="featured-box">
-        <img src="https://via.placeholder.com/500x300">
-        <div>
-            <h3>Fulbank</h3>
-            <p>Application bancaire crypto complète en C# avec interface WPF.</p>
-            <a href="#" class="btn">Voir le code</a>
+<!-- ─── PROJETS ───────────────────────────────── -->
+<section id="projets">
+  <div class="section-header fade-in">
+    <div>
+      <div class="section-label">// 01</div>
+      <h2 class="section-title">Projets</h2>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.85rem;max-width:280px;text-align:right;font-weight:300">Une sélection de réalisations, projets en cours et idées en gestation.</p>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- 01 – Ô Saveurs -->
+    <div class="project-card fade-in">
+      <div class="project-num">01 / 08</div>
+      <div class="project-header">
+        <h3 class="project-title">Ô Saveurs</h3>
+        <a href="https://osaveurs-evreux.com" target="_blank" rel="noopener" class="project-link" title="Voir le site">↗</a>
+      </div>
+      <p class="project-desc">Site vitrine pour un restaurant traditionnel français à Évreux. Présentation de la carte, horaires, réservation en ligne et pages institutionnelles. Design chaleureux ancré dans l'identité normande.</p>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
         </div>
-    </div>
-</section>
-
-<section class="projects" id="projects">
-    <div class="card hidden">
-        <h3>Daylence</h3>
-        <p>App de gestion de vie en React.</p>
+        <span class="project-status status-done">Terminé</span>
+      </div>
     </div>
 
-    <div class="card hidden">
-        <h3>Cluedo</h3>
-        <p>Jeu PHP/MySQL.</p>
+    <!-- 02 – My Review -->
+    <div class="project-card fade-in">
+      <div class="project-num">02 / 08</div>
+      <div class="project-header">
+        <h3 class="project-title">My Review</h3>
+        <a class="project-link disabled" title="Bientôt disponible">↗</a>
+      </div>
+      <p class="project-desc">Application web de notation et de critique personnelle pour les animés, séries et films. Catalogue, scores, critiques et suivi de liste de visionnage, le tout propulsé par Symfony.</p>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">Symfony</span>
+          <span class="tag">PHP</span>
+          <span class="tag">Twig</span>
+          <span class="tag">MySQL</span>
+        </div>
+        <span class="project-status status-wip">En cours</span>
+      </div>
     </div>
+
+    <!-- 03 – Daylence -->
+    <div class="project-card fade-in">
+      <div class="project-num">03 / 08</div>
+      <div class="project-header">
+        <h3 class="project-title">Daylence</h3>
+        <a class="project-link disabled" title="Bientôt disponible">↗</a>
+      </div>
+      <p class="project-desc">Organisateur de vie complet : gestion de tâches, habitudes, objectifs et agenda personnel. Interface fluide et réactive conçue pour s'intégrer naturellement au quotidien.</p>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">React JS</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">TailwindCSS</span>
+        </div>
+        <span class="project-status status-wip">En cours</span>
+      </div>
+    </div>
+
+    <!-- 04 – FULBANK -->
+    <div class="project-card fade-in">
+      <div class="project-num">04 / 08</div>
+      <div class="project-header">
+        <h3 class="project-title">FULBANK</h3>
+        <a class="project-link disabled" title="Application bureau">↗</a>
+      </div>
+      <p class="project-desc">Application bureau simulant une banque traditionnelle et une crypto-banque. Gestion de comptes, virements, portefeuille crypto et tableau de bord financier. Architecture solide en WPF.</p>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">WPF</span>
+          <span class="tag">C#</span>
+          <span class="tag">.NET</span>
+        </div>
+        <span class="project-status status-done">Terminé</span>
+      </div>
+    </div>
+
+    <!-- 05 – FC Fulbert -->
+    <div class="project-card fade-in">
+      <div class="project-num">05 / 08</div>
+      <div class="project-header">
+        <h3 class="project-title">FC Fulbert</h3>
+        <a href="https://fcfulbert.fr" target="_blank" rel="noopener" class="project-link" title="Voir le site">↗</a>
+      </div>
+      <p class="project-desc">Site vitrine imaginaire pour le club de football FC Fulbert. Présentation du club, des équipes, des résultats et du calendrier des rencontres. Ambiance sportive et dynamique.</p>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+        <span class="project-status status-done">Terminé</span>
+      </div>
+    </div>
+
+    <!-- 06 – La Tortue -->
+    <div class="project-card fade-in">
+      <div class="project-num">06 / 08</div>
+      <div class="project-header">
+        <h3 class="project-title">La Tortue</h3>
+        <a href="https://zoofulbert.com/Maxime/tortue.html" target="_blank" rel="noopener" class="project-link" title="Voir le projet">↗</a>
+      </div>
+      <p class="project-desc">Mini-site pédagogique présentant la tortue sous forme d'exposé web interactif, en remplacement d'un exposé papier classique. Projet scolaire conçu pour rendre le cours plus engageant.</p>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+        <span class="project-status status-done">Projet scolaire</span>
+      </div>
+    </div>
+
+    <!-- 07 – Nuit de l'Info -->
+    <div class="project-card fade-in">
+      <div class="project-num">07 / 08</div>
+      <div class="project-header">
+        <h3 class="project-title">Nuit de l'Info</h3>
+        <a href="https://nuitinfo-pied.vercel.app" target="_blank" rel="noopener" class="project-link" title="Voir le projet">↗</a>
+      </div>
+      <p class="project-desc">Projet réalisé en équipe en une seule nuit lors de la Nuit de l'Info. Thème : la fin du monde. Site immersif explorant scénarios catastrophes et compte à rebours apocalyptique.</p>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+        <span class="project-status status-done">1 nuit ⚡</span>
+      </div>
+    </div>
+
+    <!-- 08 – Physic -->
+    <div class="project-card fade-in">
+      <div class="project-num">08 / 08</div>
+      <div class="project-header">
+        <h3 class="project-title">Physic</h3>
+        <a class="project-link disabled" title="À venir">↗</a>
+      </div>
+      <p class="project-desc">Application mobile de suivi de musculation et de sport. Programmes d'entraînement, suivi des charges, statistiques de progression et planning hebdomadaire. Un projet qui mijote.</p>
+      <div class="project-footer">
+        <div class="project-tags">
+          <span class="tag">React Native</span>
+          <span class="tag">TypeScript</span>
+        </div>
+        <span class="project-status status-soon">À venir</span>
+      </div>
+    </div>
+
+  </div>
 </section>
 
-<section class="github">
-    <h2>Mes repos GitHub</h2>
-    <div id="repos"></div>
+<!-- ─── ABOUT ─────────────────────────────────── -->
+<section id="apropos">
+  <div class="section-header fade-in">
+    <div>
+      <div class="section-label">// 02</div>
+      <h2 class="section-title">À propos</h2>
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="about-left fade-in">
+      <p class="about-text">
+        Développeur passionné basé à <strong>Évreux, Normandie</strong>, je construis des expériences numériques qui allient esthétique et fonctionnalité.
+      </p>
+      <p class="about-text">
+        J'aime autant concevoir des <strong>interfaces web soignées</strong> que plonger dans des <strong>applications lourdes</strong> ou des projets backend robustes. Chaque projet est une occasion d'apprendre et de repousser mes limites.
+      </p>
+      <p class="about-text">
+        Actuellement en formation, je travaille en parallèle sur plusieurs projets personnels pour consolider mes compétences et construire un portfolio solide.
+      </p>
+    </div>
+    <div class="about-right fade-in">
+      <div class="skills-group">
+        <div class="skills-group-label">Front-end</div>
+        <div class="skills-list">
+          <span class="skill-pill">HTML / CSS</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">React JS</span>
+          <span class="skill-pill">React Native</span>
+          <span class="skill-pill">TypeScript</span>
+          <span class="skill-pill">TailwindCSS</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <div class="skills-group-label">Back-end</div>
+        <div class="skills-list">
+          <span class="skill-pill">PHP</span>
+          <span class="skill-pill">Symfony</span>
+          <span class="skill-pill">MySQL</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <div class="skills-group-label">Logiciel</div>
+        <div class="skills-list">
+          <span class="skill-pill">C#</span>
+          <span class="skill-pill">.NET / WPF</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <div class="skills-group-label">Outils</div>
+        <div class="skills-list">
+          <span class="skill-pill">Git / GitHub</span>
+          <span class="skill-pill">VS Code</span>
+          <span class="skill-pill">Figma</span>
+          <span class="skill-pill">Vercel</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- ─── CONTACT ────────────────────────────────── -->
+<section id="contact">
+  <div class="contact-section fade-in">
+    <div class="section-label">// 03</div>
+    <h2 class="contact-title">Travaillons<br><span>ensemble</span></h2>
+    <p style="color:var(--text-muted);max-width:420px;font-weight:300;line-height:1.7">
+      Un projet en tête ? Une collaboration à proposer ? Je suis ouvert aux opportunités et aux échanges.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:contact@maximehenault.fr" class="contact-link primary">✉ M'écrire</a>
+      <a href="https://github.com/maximehenault" target="_blank" rel="noopener" class="contact-link">GitHub</a>
+      <a href="https://linkedin.com/in/maximehenault" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────── -->
+<footer>
+  <span>© 2025 Maxime Henault</span>
+  <span>Évreux, Normandie 🇫🇷</span>
+  <a href="#">maximehenault.fr</a>
+</footer>
 
 <script>
-
-/* LOADER */
-window.onload = () => {
-    setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-    }, 1000);
-};
-
-/* CURSOR */
-const cursor = document.querySelector('.cursor');
-document.addEventListener('mousemove', e => {
-    cursor.style.top = e.clientY + 'px';
-    cursor.style.left = e.clientX + 'px';
-});
-
-/* TYPEWRITER */
-const text = "Développeur Full Stack | Symfony | React | C#";
-let i = 0;
-function typing() {
-    if (i < text.length) {
-        document.getElementById("type").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typing, 40);
-    }
-}
-typing();
-
-/* PARTICLES */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<80;i++){
-    particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*2
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
     });
-}
+  }, { threshold: 0.1 });
 
-function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="#7F5AF0";
-        ctx.fill();
-    });
-    requestAnimationFrame(draw);
-}
-draw();
-
-/* GITHUB API */
-fetch("https://api.github.com/users/MaximeHenault/repos")
-.then(res=>res.json())
-.then(data=>{
-    const container = document.getElementById("repos");
-    data.slice(0,5).forEach(repo=>{
-        const div = document.createElement("div");
-        div.classList.add("repo");
-        div.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>`;
-        container.appendChild(div);
-    });
-});
-
-/* SCROLL ANIM */
-const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            entry.target.classList.add('show');
-        }
-    });
-});
-
-document.querySelectorAll('.hidden').forEach(el=>observer.observe(el));
-
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 
 </body>
